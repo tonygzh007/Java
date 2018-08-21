@@ -1,6 +1,5 @@
 package com.gzh.spring;
 
-import com.gzh.dao.ICustomerDao;
 import com.gzh.service.ICustomerService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -20,8 +19,16 @@ public class AppTest
         ApplicationContext ac= new ClassPathXmlApplicationContext("bean.xml");
         //2.根据bean的id获取对象
         ICustomerService cs= (ICustomerService) ac.getBean("customerService");
-        ICustomerDao cdao= (ICustomerDao) ac.getBean("customerDao");
-        System.out.println(cs);
-        System.out.println(cdao);
+        cs.saveCustomer();
+//        ICustomerService cs2= (ICustomerService) ac.getBean("customerService");
+//        ICustomerDao cdao= (ICustomerDao) ac.getBean("customerDao");
+//        //创建静态工厂
+//        ICustomerService csFactory= (ICustomerService) ac.getBean("staticCustomerService");
+//        //创建实例工厂
+//        ICustomerService csInstanceFactory= (ICustomerService) ac.getBean("instanceCustomerService");
+//        System.out.println(cs1==cs2);
+//        System.out.println(cdao);
+//        System.out.println(csFactory);
+//        System.out.println(csInstanceFactory);
     }
 }

@@ -7,13 +7,13 @@ public class CustomerServiceImpl implements ICustomerService {
 
     private ICustomerDao customerDao= null;
 
-    public CustomerServiceImpl(){
-        System.out.println("已经创建对象了");
+    /*使用set方法来注入*/
+    public void setCustomerDao(ICustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 
     @Override
     public void saveCustomer() {
-
         customerDao.save();
     }
 }
