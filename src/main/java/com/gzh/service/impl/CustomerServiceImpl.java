@@ -2,20 +2,19 @@ package com.gzh.service.impl;
 
 import com.gzh.dao.ICustomerDao;
 import com.gzh.service.ICustomerService;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CustomerServiceImpl implements ICustomerService {
 
+    @Autowired
     private ICustomerDao customerDao= null;
 
-    /*使用set方法来注入*/
-    public void setCustomerDao(ICustomerDao customerDao) {
-        this.customerDao = customerDao;
-    }
 
     @Override
     public void saveCustomer() {
+//        System.out.println("save");
         customerDao.save();
     }
 
