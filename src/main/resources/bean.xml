@@ -16,10 +16,11 @@
     <!--<bean id="now" class="java.util.Date"></bean>-->
 
     <!--set方法注入-->
-    <bean id="customerService" class="com.gzh.service.impl.CustomerServiceImpl">
-        <property name="customerDao" ref="customerDao"></property>
-    </bean>
-    <bean id="customerDao" class="com.gzh.dao.impl.CustomerDaoImpl"></bean>
+
+    <!--<bean id="customerService" class="com.gzh.service.impl.CustomerServiceImpl">-->
+        <!--<property name="customerDao" ref="customerDao"></property>-->
+    <!--</bean>-->
+    <!--<bean id="customerDao" class="com.gzh.dao.impl.CustomerDaoImpl"></bean>-->
 
     <!--&lt;!&ndash;多例&ndash;&gt;-->
     <!--&lt;!&ndash;<bean id="customerService" class="com.gzh.service.impl.CustomerServiceImpl" scope="prototype"></bean>&ndash;&gt;-->

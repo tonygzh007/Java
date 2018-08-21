@@ -5,4 +5,8 @@ package com.gzh.service;
  */
 public interface ICustomerService {
     void saveCustomer();
+    void updateCustomer();
+    void delCustomer();
+    void getCustomerById();
+    void getAllCustomer();
 }
