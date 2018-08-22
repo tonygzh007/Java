@@ -2,12 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                             http://www.springframework.org/schema/beans/spring-beans.xsd
                             http://www.springframework.org/schema/context
-                            http://www.springframework.org/schema/context/spring-context.xsd">
+                            http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package="com.gzh"></context:component-scan>
+    <!--<context:component-scan base-package="com.gzh"></context:component-scan>-->
 
     <!-- bean definitions here -->
     <!--构造函数注入，该类有成员三个变量
@@ -37,4 +40,25 @@
     <!--&lt;!&ndash;配置使用实例工厂创建Bean对象，先要创建InstanceFactory工厂对象，再调用工厂下的方法getCustomerService&ndash;&gt;-->
     <!--<bean id="instanceFactory" class="com.gzh.factory.InstanceFactory"></bean>-->
     <!--<bean id="instanceCustomerService" factory-bean="instanceFactory" factory-method="getCustomerService"></bean>-->
+
+    <!--配置spring的AOP-->
+    <!--配置service-->
+    <bean id ="customerServiceAOP" class="com.springAOP.impl.CustomerService"></bean>
+    <!--基于xml的aop配置步骤：必须导入aop的jar包-->
+    <!--第一步：把通知类Logger交给spring来管理-->
+    <bean id="logger" class="com.springAOP.utils.Logger"></bean>
+    <!--第二步：导入AOP名称空间，并且使用aop:config开始aop的配置-->
+    <!--xmlns:aop="http://www.springframework.org/schema/aop"-->
+    <!--http://www.springframework.org/schema/aop-->
+    <!--http://www.springframework.org/schema/aop/spring-aop.xsd-->
+    <aop:config>
+        <!--第三步：使用aop:aspect配置切面,id属性用于给切面提供一个唯一标识。reg属性：用于应用通知Bean的id-->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!--第四步：配置通知的类型，指定增强的方法何时执行，method属性用于增强的方法名称，pointcut属性，用于指定切入点表达式-->
+            <!--切入点表达式：关键字：execution(表达式)-->
+            <!--表达式的写法：访问修饰符  返回值  包名.包名...类名.方法名(参数列表)-->
+            <aop:before method="printLog" pointcut="execution(public void com.springAOP.impl.CustomerService.Save())"></aop:before>
+        </aop:aspect>
+
+    </aop:config>
 </beans>

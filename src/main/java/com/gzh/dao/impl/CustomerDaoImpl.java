@@ -1,9 +1,8 @@
 package com.gzh.dao.impl;
 
 import com.gzh.dao.ICustomerDao;
-import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class CustomerDaoImpl implements ICustomerDao{
     @Override
     public void save() {
