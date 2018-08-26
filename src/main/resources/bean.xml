@@ -57,7 +57,33 @@
             <!--第四步：配置通知的类型，指定增强的方法何时执行，method属性用于增强的方法名称，pointcut属性，用于指定切入点表达式-->
             <!--切入点表达式：关键字：execution(表达式)-->
             <!--表达式的写法：访问修饰符  返回值  包名.包名...类名.方法名(参数列表)-->
+            <!--全匹配方式public void com.springAOP.impl.CustomerService.Save()-->
+            <!--全通配方式* *..*.*(..)-->
+            <!--
+                1.访问修饰符public可以省略
+                2.返回值可以使用通配符，表示任意返回值。*
+                3.包名可以使用通配符，表示任意包。但是，有几个包就需要写几个*
+                4.包名可以使用..表示当前包及其子包
+                    *(返回值) *..*(多个包下的所有子包)
+                    * com..*.*()
+                5.类名和方法名都可以使用通配符
+                6.参数类别可以使用具体类型，来表示参数类型
+                    基本类型直接写类型名称：int
+                    引用类型必须是包名.类名：java.lang.Integer
+                7.参数列表可以使用通配符，表示任意参数类型，但是必须有参数
+                    * com..*.*(*)
+                8.参数列表可以使用..表示有无参数均可，有参数可以是任意类型
+                    * com..*.*(..)
+                9.实际开发中，我们一般情况下，我们都是对业务层方法进行增强
+                    所以写法：* com.gzh.service.impl.*.*(..)
+            -->
             <aop:before method="printLog" pointcut="execution(public void com.springAOP.impl.CustomerService.Save())"></aop:before>
+            <aop:after method="closeLog" pointcut="execution(* *..*.*(..))"></aop:after>
+            <!--使用切入点表达式-->
+            <aop:after method="closeParam" pointcut-ref="pt1"></aop:after>
+
+            <!--定义通用的切入点表达式：如果是写在了aop:aspect标签内部，则表示只有当前切面可用 -->
+            <aop:pointcut id="pt1" expression="execution(* *..*.*(*))"></aop:pointcut>
         </aop:aspect>
 
     </aop:config>
